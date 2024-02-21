@@ -4,7 +4,7 @@ from utils import return_generated_tasks_docx
 
 
 with gr.Blocks() as demo:
-    gr.Markdown("Введите данные об учениках и нажмите кнопку 'Сгенерировать файл с заданиями', затем нажмите на файл "
+    gr.Markdown("Введите данные об учениках и нажмите кнопку 'Сгенерировать файл с заданиями', далее нажмите на файл "
                 "'Задания', чтобы скачать его ")
     with gr.Row():
         inputs = [gr.Dataframe(

@@ -17,7 +17,7 @@ def generate_tasks(students_name, students_class, subject, amount_of_tasks, list
 
 def return_generated_tasks_docx(dataframe, class_level):
     doc = Document()
-    file_name = "Задания.docx"
+    file_name = "Готовые_задания.docx"
     for i in range(dataframe.shape[0]):
         generated_content = generate_tasks(students_name=dataframe["ФИО Ученика"][i], students_class=class_level, subject=dataframe["Предмет"][i], amount_of_tasks=dataframe["Количество заданий"][i], list_of_themes=dataframe["Темы"][i])
         for choice in generated_content:
