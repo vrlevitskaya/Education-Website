@@ -1,29 +1,29 @@
 import gradio as gr
-from utils import return_generated_tasks
+from utils import return_generated_tasks_docx
 
-demo = gr.Interface(
-    return_generated_tasks,
-    inputs=[
-        gr.Dataframe(
+
+
+with gr.Blocks() as demo:
+    gr.Markdown("Введите данные об учениках и нажмите кнопку 'Сгенерировать файл с заданиями', затем нажмите на файл "
+                "'Задания', чтобы скачать его ")
+    with gr.Row():
+        inputs = [gr.Dataframe(
+
             label="Таблица с оценками",
-            headers=["ФИО Ученика", "Предмет", "Тема", "Оценка"],
-            datatype=["str", "str", "str", "number"],
-            row_count=5,
-            col_count=4,
+            headers=["Номер", "ФИО Ученика", "Темы", "Предмет", "Количество заданий"],
+            datatype=["number", "str", "str", "str", "number"],
+            row_count=1,
+            col_count=(5, 'fixed'),
         ),
-        gr.Dropdown(
-                    choices=[i for i in range(1, 12)],
-                    label="Выберите класс обучения для учеников"
-                    ),
-        gr.Dropdown(
-                    choices=[i for i in range(1, 5)],
-                    label="Выберите курс обучения для студентов"
-                    ),
-    ],
-    outputs="file",
-    description="",
-)
+            gr.Dropdown(
+                choices=[i for i in range(1, 12)],
+                label="Выберите класс обучения для учеников"
+            )]
+        outputs = gr.File()
 
-if __name__ == "__main__":
-    demo.launch()
+    btn = gr.Button("Сгенерировать файл с заданиями")
+    btn.click(fn=return_generated_tasks_docx, inputs=inputs, outputs=outputs)
+
+
+demo.launch()
 
